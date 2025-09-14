@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 /// Data model representing a color entry in the database.
 class ColorHistoryModel extends Equatable {
+  /// Maximum value for RGB components
+  static const int _maxRgbValue = 255;
+
   /// Unique identifier for the color entry
   final int? id;
 
@@ -55,9 +58,9 @@ class ColorHistoryModel extends Equatable {
   /// Creates a [ColorHistoryModel] from a [Color] object.
   factory ColorHistoryModel.fromColor(Color color) {
     return ColorHistoryModel(
-      red: (color.r * 255).round(),
-      green: (color.g * 255).round(),
-      blue: (color.b * 255).round(),
+      red: (color.r * _maxRgbValue).round(),
+      green: (color.g * _maxRgbValue).round(),
+      blue: (color.b * _maxRgbValue).round(),
       timestamp: DateTime.now(),
     );
   }

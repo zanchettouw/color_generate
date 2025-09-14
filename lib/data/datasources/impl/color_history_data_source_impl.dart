@@ -5,6 +5,8 @@ import 'package:sqflite/sqflite.dart';
 
 /// SQLite implementation of [ColorHistoryDataSource].
 class ColorHistoryDataSourceImpl implements ColorHistoryDataSource {
+  /// The maximum number of colors to store in history
+  static const int _maxHistorySize = 5;
   final DatabaseProvider _databaseProvider;
 
   /// Creates a new [ColorHistoryDataSourceImpl] instance.
@@ -17,7 +19,7 @@ class ColorHistoryDataSourceImpl implements ColorHistoryDataSource {
     final results = await db.query(
       'color_history',
       orderBy: 'timestamp DESC',
-      limit: 5,
+      limit: _maxHistorySize,
     );
 
     return results.map(ColorHistoryModel.fromMap).toList();
@@ -34,7 +36,7 @@ class ColorHistoryDataSourceImpl implements ColorHistoryDataSource {
       );
 
       // If we already have 5 colors, delete the oldest one
-      if (count != null && count >= 5) {
+      if (count != null && count >= _maxHistorySize) {
         await txn.delete(
           'color_history',
           where: '''

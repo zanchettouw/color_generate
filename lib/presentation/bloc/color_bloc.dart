@@ -1,10 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:color_generate/domain/usecases/generate_random_color.dart';
-import 'package:color_generate/domain/usecases/get_last_colors.dart';
-import 'package:color_generate/domain/usecases/save_color.dart';
+import 'package:color_generate/domain/usecases/color_saver.dart';
+import 'package:color_generate/domain/usecases/last_colors_getter.dart';
+import 'package:color_generate/domain/usecases/random_color_generator.dart';
 import 'package:color_generate/presentation/bloc/color_event.dart';
 import 'package:color_generate/presentation/bloc/color_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// BLoC for managing color state and history.
 class ColorBloc extends Bloc<ColorEvent, ColorState> {

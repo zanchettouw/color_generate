@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:color_generate/domain/entities/color_info.dart';
 import 'package:color_generate/presentation/bloc/color_bloc.dart';
 import 'package:color_generate/presentation/bloc/color_event.dart';
 import 'package:color_generate/presentation/bloc/color_state.dart';
 import 'package:color_generate/presentation/widgets/adaptive_text.dart';
 import 'package:color_generate/presentation/widgets/color_history_list.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The main page of the application that displays a color-changing background.
 ///
@@ -85,13 +85,13 @@ class ColorChangerPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (state.colorHistory != null) ...[
+                if (state.colorHistory?.isNotEmpty ?? false) ...[
                   Positioned(
                     left: 0,
                     right: 0,
                     bottom: 32,
                     child: ColorHistoryList(
-                      colors: state.colorHistory!,
+                      colors: state.colorHistory ?? [],
                       onColorSelected: (color) {
                         _onColorSelected(context, color);
                       },

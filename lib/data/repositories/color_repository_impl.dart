@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
 import 'package:color_generate/domain/entities/color_info.dart';
 import 'package:color_generate/domain/repositories/color_repository.dart';
+import 'package:flutter/material.dart';
 
 /// A concrete implementation of [ColorRepository] that generates random colors.
 ///
@@ -13,6 +12,9 @@ import 'package:color_generate/domain/repositories/color_repository.dart';
 /// - Colors are always fully opaque (alpha = 1.0)
 /// - The distribution of colors is uniform across the RGB color space
 class ColorRepositoryImpl implements ColorRepository {
+  /// Maximum value for RGB components (0-255 inclusive)
+  static const int _maxRgbValue = 255;
+
   /// The random number generator used for color generation.
   ///
   /// This can be injected for testing purposes to make the color
@@ -33,9 +35,9 @@ class ColorRepositoryImpl implements ColorRepository {
   ColorInfo generateRandomColor() {
     return ColorInfo(
       color: Color.fromRGBO(
-        _random.nextInt(256), // Red component (0-255)
-        _random.nextInt(256), // Green component (0-255)
-        _random.nextInt(256), // Blue component (0-255)
+        _random.nextInt(_maxRgbValue), // Red component (0-255)
+        _random.nextInt(_maxRgbValue), // Green component (0-255)
+        _random.nextInt(_maxRgbValue), // Blue component (0-255)
         1, // Alpha component (fully opaque)
       ),
     );

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:color_generate/domain/entities/color_info.dart';
+import 'package:flutter/material.dart';
 
 /// A widget that displays a list of previously used colors.
 class ColorHistoryList extends StatelessWidget {

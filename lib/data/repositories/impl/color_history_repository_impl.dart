@@ -14,6 +14,7 @@ class ColorHistoryRepositoryImpl implements ColorHistoryRepository {
   @override
   Future<List<ColorInfo>> getLastColors() async {
     final models = await _dataSource.getLastColors();
+
     return models.map((model) => ColorInfo(color: model.toColor())).toList();
   }
 
