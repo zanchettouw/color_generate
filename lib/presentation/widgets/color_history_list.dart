@@ -17,7 +17,7 @@ class ColorHistoryList extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return SizedBox(
       height: 50,
       child: ListView.builder(

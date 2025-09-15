@@ -2,13 +2,21 @@ import 'package:color_generate/data/models/color_history_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// Test constants
+const testId = 1;
+const testRed = 255;
+const testGreen = 128;
+const testBlue = 64;
+const maxRgbValue = 255;
+const testOpacity = 1.0;
+
 void main() {
   final testDate = DateTime(2023);
   final testModel = ColorHistoryModel(
-    id: 1,
-    red: 255,
-    green: 128,
-    blue: 64,
+    id: testId,
+    red: testRed,
+    green: testGreen,
+    blue: testBlue,
     timestamp: testDate,
   );
 
@@ -16,10 +24,10 @@ void main() {
 
   group('ColorHistoryModel', () {
     test('should create model with correct values', () {
-      expect(testModel.id, equals(1));
-      expect(testModel.red, equals(255));
-      expect(testModel.green, equals(128));
-      expect(testModel.blue, equals(64));
+      expect(testModel.id, equals(testId));
+      expect(testModel.red, equals(testRed));
+      expect(testModel.green, equals(testGreen));
+      expect(testModel.blue, equals(testBlue));
       expect(testModel.timestamp, equals(testDate));
     });
 
@@ -28,20 +36,20 @@ void main() {
       final map = testModel.toMap();
 
       // Assert
-      expect(map['id'], equals(1));
-      expect(map['red'], equals(255));
-      expect(map['green'], equals(128));
-      expect(map['blue'], equals(64));
+      expect(map['id'], equals(testId));
+      expect(map['red'], equals(testRed));
+      expect(map['green'], equals(testGreen));
+      expect(map['blue'], equals(testBlue));
       expect(map['timestamp'], equals(testDate.millisecondsSinceEpoch));
     });
 
     test('should create from map correctly', () {
       // Arrange
       final map = {
-        'id': 1,
-        'red': 255,
-        'green': 128,
-        'blue': 64,
+        'id': testId,
+        'red': testRed,
+        'green': testGreen,
+        'blue': testBlue,
         'timestamp': testDate.millisecondsSinceEpoch,
       };
 
@@ -57,23 +65,23 @@ void main() {
       final color = testModel.toColor();
 
       // Assert
-      expect(color.r * maxRgbValue, equals(255));
-      expect(color.g * maxRgbValue, equals(128));
-      expect(color.b * maxRgbValue, equals(64));
-      expect(color.a * maxRgbValue, equals(255)); // Fully opaque
+      expect(color.r * maxRgbValue, equals(testRed));
+      expect(color.g * maxRgbValue, equals(testGreen));
+      expect(color.b * maxRgbValue, equals(testBlue));
+      expect(color.a * maxRgbValue, equals(maxRgbValue)); // Fully opaque
     });
 
     test('should create from Color correctly', () {
       // Arrange
-      const color = Color.fromRGBO(255, 128, 64, 1);
+      const color = Color.fromRGBO(testRed, testGreen, testBlue, testOpacity);
 
       // Act
       final model = ColorHistoryModel.fromColor(color);
 
       // Assert
-      expect(model.red, equals(255));
-      expect(model.green, equals(128));
-      expect(model.blue, equals(64));
+      expect(model.red, equals(testRed));
+      expect(model.green, equals(testGreen));
+      expect(model.blue, equals(testBlue));
       // We can't test the exact timestamp since it uses DateTime.now()
       expect(model.timestamp, isNotNull);
     });

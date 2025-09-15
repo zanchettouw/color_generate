@@ -9,12 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// This widget sets up:
 /// - BLoC provider for state management using dependency injection
 /// - Initial route to [ColorChangerPage]
-class MyApp extends StatelessWidget {
-  /// Creates a new [MyApp] instance.
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  /// Creates a new [App] instance.
+  const App({super.key});
 
   @override
-  Widget build(BuildContext _) {
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Color Changer',
       home: BlocProvider(

@@ -6,12 +6,22 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sqflite/sqflite.dart';
 
+//ignore_for_file: avoid_late_keyword
+
 @GenerateNiceMocks([
   MockSpec<DatabaseProvider>(),
   MockSpec<Database>(),
   MockSpec<Transaction>(),
 ])
 import 'color_history_data_source_impl_test.mocks.dart';
+
+// Test constants
+const testId = 1;
+const testRed = 255;
+const testGreen = 128;
+const testBlue = 64;
+const maxHistoryCount = 5;
+const belowLimitCount = 3;
 
 void main() {
   late ColorHistoryDataSourceImpl sut;
@@ -32,12 +42,18 @@ void main() {
     test('should return list of ColorHistoryModel from database', () async {
       // Arrange
       final testDate = DateTime(2023);
+      // Test constants
+      const testId = 1;
+      const testRed = 255;
+      const testGreen = 128;
+      const testBlue = 64;
+
       final testData = [
         {
-          'id': 1,
-          'red': 255,
-          'green': 128,
-          'blue': 64,
+          'id': testId,
+          'red': testRed,
+          'green': testGreen,
+          'blue': testBlue,
           'timestamp': testDate.millisecondsSinceEpoch,
         },
       ];
@@ -107,7 +123,6 @@ void main() {
               id IN 
                 (SELECT id FROM color_history ORDER BY timestamp ASC LIMIT 1)
         ''',
-          whereArgs: null,
         ),
       ).called(1);
 
